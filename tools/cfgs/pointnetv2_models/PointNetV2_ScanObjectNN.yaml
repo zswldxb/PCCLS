@@ -17,8 +17,8 @@ experiment:
 # ---------------------------------------------------------------------------- #
 dataset:
   common:
-    NAME: ModelNet40
-    data_path: ../data/ModelNet40
+    NAME: ScanObjectNN
+    data_path: ../data/ScanObjectNN
     num_points: 1024
   train:
     split: train
