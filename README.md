@@ -30,3 +30,10 @@
 
 |   Method   |  Avg Best OA (\%)  | Max Best OA (\%) | Avg Best mAcc (\%) | Max Best mAcc (\%) |
 | :--------: | :----------------: | :--------------: | :----------------: | :----------------: |
+
+# Acknowledge
+
+[Official Implementation of PointNet](https://github.com/charlesq34/pointnet)
+[Official Implementation of PointNet++](https://github.com/charlesq34/pointnet2)
+[Unofficial Implementation of PointNet and PointNet++](https://github.com/yanx27/Pointnet_Pointnet2_pytorch)
+[Unofficial Implementation of PointNet++](https://github.com/erikwijmans/Pointnet2_PyTorch)

@@ -3,6 +3,7 @@ import warnings
 from torch.autograd import Function
 from typing import *
 Tensor = torch.Tensor
+from functools import partial
 
 
 from . import bpa_point_aggregation_cuda
@@ -137,10 +138,18 @@ class BPAThreeInterpolate(Function):
         return grad_pnt, None, None
 
 
+def gather_points(pts: Tensor, idx: Tensor) -> Tensor:
+    sz = idx.size()
+    res = torch.gather(pts, 1, idx.reshape(sz[0], -1, 1).expand(-1, -1, pts.size(-1))).reshape(*sz, -1)
+    return res
+
 bpa_furthest_point_sampling = BPAFurthestPointSampling.apply
 bpa_knn_query = BPAKNNQuery.apply
 bpa_ball_query = BPABallQuery.apply
-bpa_gather_query = BPAGatherQuery.apply
-bpa_gather_group = BPAGatherGroup.apply
+# bpa_gather_query = BPAGatherQuery.apply
+# bpa_gather_group = BPAGatherGroup.apply
+bpa_gather_query = gather_points
+bpa_gather_group = gather_points
 bpa_three_query = BPAThreeNNQuery.apply
 bpa_three_interpolate = BPAThreeInterpolate.apply
+

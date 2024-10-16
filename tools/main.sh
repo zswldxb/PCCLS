@@ -9,3 +9,7 @@
 # ---------------------------------------- PointNetV02 ---------------------------------------- #
 # CUDA_VISIBLE_DEVICES=4 python main.py --cfg cfgs/pointnetv02_models/PointNetV02_ModelNet40.yaml
 # CUDA_VISIBLE_DEVICES=5 python main.py --cfg cfgs/pointnetv02_models/PointNetV02_ScanObjectNN.yaml
+
+# ---------------------------------------- PointNetV10 ---------------------------------------- #
+# CUDA_VISIBLE_DEVICES=0 python main.py --cfg cfgs/pointnetv10_models/PointNetV10_ModelNet40.yaml
+# CUDA_VISIBLE_DEVICES=1 python main.py --cfg cfgs/pointnetv10_models/PointNetV10_ScanObjectNN.yaml
