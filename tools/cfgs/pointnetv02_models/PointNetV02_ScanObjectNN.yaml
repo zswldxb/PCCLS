@@ -38,7 +38,7 @@ dataloader:
 # Model configs
 # ---------------------------------------------------------------------------- #
 model:
-  NAME: PointNetV1
+  NAME: PointNetV02
   n_cls: 40
   d_in: 3
   d_feats: [64, 128, 256, 512]

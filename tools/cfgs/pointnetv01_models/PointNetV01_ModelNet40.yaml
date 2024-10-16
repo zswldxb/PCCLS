@@ -17,8 +17,8 @@ experiment:
 # ---------------------------------------------------------------------------- #
 dataset:
   common:
-    NAME: ScanObjectNN
-    data_path: ../data/ScanObjectNN
+    NAME: ModelNet40
+    data_path: ../data/ModelNet40
     num_points: 1024
   train:
     split: train
@@ -38,7 +38,7 @@ dataloader:
 # Model configs
 # ---------------------------------------------------------------------------- #
 model:
-  NAME: PointNetV2
+  NAME: PointNetV01
   n_cls: 40
   d_in: 3
   d_feats: [64, 128, 256, 512]

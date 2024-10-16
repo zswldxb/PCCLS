@@ -1,6 +1,3 @@
-'''
-CUDA_VISIBLE_DEVICES=0 nohup python main.py --cfg cfgs/DifferentExpansion/ScanObjectNN_HilbertFormerV1ClsHilbertSeqWinTrans.yaml > output/DifferentExpansion/ScanObjectNN_HilbertFormerV1ClsHilbertSeqWinTrans.txt 2>&1 &
-'''
 import os
 import sys
 sys.path.insert(0, '../')

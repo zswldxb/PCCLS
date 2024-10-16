@@ -1,9 +1,9 @@
-from .PointNetV1 import PointNetV1
-from .PointNetV2 import PointNetV2
-from .PointNetV3 import PointNetV3
+from .PointNetV00 import PointNetV00
+from .PointNetV01 import PointNetV01
+from .PointNetV02 import PointNetV02
 
 __all__ = {
-    'PointNetV1': PointNetV1,
-    'PointNetV2': PointNetV2,
-    'PointNetV3': PointNetV3,
+    'PointNetV00': PointNetV00,
+    'PointNetV01': PointNetV01,
+    'PointNetV02': PointNetV02,
 }

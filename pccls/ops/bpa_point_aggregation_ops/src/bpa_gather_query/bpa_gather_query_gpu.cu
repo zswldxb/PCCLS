@@ -28,7 +28,7 @@ __global__ void bpa_gather_query_forward_kernel(int b_s, int c_s, int p_n, int g
 //    grad_pnt: (b_s, p_n, c_s)
 __global__ void bpa_gather_query_backward_kernel(int b_s, int c_s, int p_n, int g_n, const PointType * __restrict__ grad_qry, const IndexType * __restrict__ idx, PointType * __restrict__ grad_pnt) {
   int b_i = blockIdx.z;
-  int c_i = blockIdx.y * QUERY_SPLIT;
+  int c_i = blockIdx.y;
   int g_i = blockIdx.x * blockDim.x + threadIdx.x;
   if (b_i >= b_s || g_i >= g_n || c_i >= c_s) return;
 

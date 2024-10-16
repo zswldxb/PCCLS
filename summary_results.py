@@ -33,5 +33,5 @@ for k, v in mode_dict.items():
     all_macc = np.array(all_macc) * 100
     print(f"| Model | Avg Best OA (\%) | Max Best OA (\%) | Avg Best mAcc (\%) | Max Best mAcc (\%) |")
     print(f"| {k} "
-          f"| {all_oa.mean():.3f} \pm {all_oa.std():.3f} | {all_oa.max():.3f} "
-          f"| {all_macc.mean():.3f} \pm {all_macc.std():.3f} | {all_macc.max():.3f} |")
+          f"| ${all_oa.mean():.3f} \pm {all_oa.std():.3f}$ | ${all_oa.max():.3f}$ "
+          f"| ${all_macc.mean():.3f} \pm {all_macc.std():.3f}$ | ${all_macc.max():.3f}$ |")

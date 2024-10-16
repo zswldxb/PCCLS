@@ -20,7 +20,7 @@ class BasicLayer(nn.Module):
         return x
 
 
-class PointNetV2Encoder(nn.Module):
+class PointNetV01Encoder(nn.Module):
     def __init__(self, d_in: int, d_feats: List[int], norm: str='BN', act: str='ReLU', *, ndim: int=1, channels_first: bool=False):
         super().__init__()
         self.n_stgs = len(d_feats)
@@ -32,10 +32,10 @@ class PointNetV2Encoder(nn.Module):
         return x
 
 
-class PointNetV2(nn.Module):
+class PointNetV01(nn.Module):
     def __init__(self, cfg):
         super().__init__()
-        self.feat = PointNetV2Encoder(cfg.d_in, cfg.d_feats)
+        self.feat = PointNetV01Encoder(cfg.d_in, cfg.d_feats)
         self.head = PointClsHead(cfg.d_feats[-1], cfg.n_cls)
 
     def forward(self, x):
@@ -50,6 +50,6 @@ if __name__ == '__main__':
     cfg = EasyDict(dict(n_cls=40, d_in=3, d_feats=[64, 128, 256, 512]))
     batch_size, point_size, channel_size, class_size = (1 << 4), (1 << 10), 3, 40
     x, y = torch.rand((batch_size, point_size, channel_size)).cuda(), torch.randint(0, 40, (batch_size,)).long().cuda()
-    model = PointNetV2(cfg).cuda()
+    model = PointNetV01(cfg).cuda()
     z = model(x)
     print(x.shape, y.shape, z.shape)
