@@ -6,7 +6,7 @@
 
 #### PointNetV00
 
-添加 PointNetV00 并将其改为 4 阶段的模型 (删除其中 STN3d 部分的内容), 虽然会降点, 但是便于作为后续模型的 BaseLine.
+将 [PointNet](https://arxiv.org/abs/1612.00593) 添加为 PointNetV00, 并将其改为 4 阶段的模型 (删除其中 STN3d 部分的内容), 虽然会降点, 但是便于作为后续模型的 BaseLine.
 
 #### PointNetV01
 
@@ -15,6 +15,17 @@
 #### PointNetV02
 
 对 PointNetV00 添加 PointClsStem (邻域特征聚合) 用于增强初始的特征.
+
+### PointNetV1 Series
+
+#### PointNetV10
+
+将 [PointNet++](https://arxiv.org/abs/1706.02413) 添加为 PointNetV10 (SSG, Single Stage Grouping).
+
+#### PointNetV11
+
+将 PointNetV10 改为 4 阶段的模型.
+
 
 ## Experiments
 
@@ -37,3 +48,4 @@
 [Official Implementation of PointNet++](https://github.com/charlesq34/pointnet2)
 [Unofficial Implementation of PointNet and PointNet++](https://github.com/yanx27/Pointnet_Pointnet2_pytorch)
 [Unofficial Implementation of PointNet++](https://github.com/erikwijmans/Pointnet2_PyTorch)
+[Official Implementation of CurveNet](https://github.com/tiangexiang/CurveNet)
