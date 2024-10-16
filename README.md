@@ -24,7 +24,7 @@
 
 #### PointNetV11
 
-将 PointNetV10 改为 4 阶段的模型.
+将 PointNetV10 改为 4 阶段的模型, 并将每一阶段的多层全连接换成了残差连接.
 
 
 ## Experiments

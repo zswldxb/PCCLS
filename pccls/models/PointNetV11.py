@@ -3,6 +3,7 @@ import torch.nn as nn
 from typing import List
 from functools import partial
 from pccls.models.module_utils.mlp_utils import proj_fn, norm_fn, act_fn
+from pccls.models.module_utils.mlp_utils import MLPND
 from pccls.models.module_utils.pool_utils import MaxPool
 from pccls.models.PointClsStem import PointClsStem
 from pccls.models.PointClsHead import PointClsHead
@@ -25,10 +26,10 @@ class BasicLayer(nn.Module):
     
 
 class PointNetV11Encoder(nn.Module):
-    def __init__(self, g_n, g_k, g_r, d_in, d_out, norm: str='BN', act: str='ReLU'):
+    def __init__(self, g_n, g_k, g_r, d_in, d_hid, d_out, norm: str='BN', act: str='ReLU'):
         super().__init__()
         self.g_n, self.g_k, self.g_r = g_n, g_k, g_r
-        self.blk = nn.Sequential(BasicLayer(d_in, d_out, norm=norm, act=act, ndim=2), MaxPool(2, keepdim=False))
+        self.blk = nn.Sequential(MLPND(d_in, d_hid, norm=norm, act=act, ndim=2), BasicLayer(d_hid, d_out, norm=norm, act=act, ndim=2), MaxPool(2, keepdim=False))
 
     def forward(self, f, p):
         u_ce = bpa.bpa_furthest_point_sampling(p, self.g_n)
@@ -47,7 +48,7 @@ class PointNetV11(nn.Module):
         g_ns, g_ks, g_rs = cfg.g_ns, cfg.g_ks, cfg.g_rs
         n_stg = len(d_fos)
         self.stem = PointClsStem(d_pis, d_stem, cfg.norm, cfg.act)
-        self.encoder = nn.ModuleList([PointNetV11Encoder(g_n=g_ns[i], g_k=g_ks[i], g_r=g_rs[i], d_in=d_fis[i] + d_pis, d_out=d_fos[i]) for i in range(n_stg)])
+        self.encoder = nn.ModuleList([PointNetV11Encoder(g_n=g_ns[i], g_k=g_ks[i], g_r=g_rs[i], d_in=d_fis[i]+d_pis, d_hid=d_fis[i], d_out=d_fos[i]) for i in range(n_stg)])
         self.head = PointClsHead(d_fos[3], cfg.n_cls, cfg.norm, cfg.act)
 
     def forward(self, p):
@@ -61,7 +62,7 @@ class PointNetV11(nn.Module):
 if __name__ == '__main__':
     import torch
     from easydict import EasyDict
-    cfg = EasyDict(dict(n_cls=40, d_in=3, d_stem=32, g_ns=[512, 256, 128, 64], g_ks=[20, 20, 20, 20], g_rs=[0.05, 0.1, 0.2, 0.4], d_feats=[64, 128, 256, 512], norm='BN', act='ReLU'))
+    cfg = EasyDict(dict(n_cls=40, d_in=3, d_stem=32, g_ns=[1024, 256, 64, 16], g_ks=[32, 32, 32, 16], g_rs=[0.1, 0.2, 0.4, 0.8], d_feats=[64, 128, 256, 512], norm='BN', act='ReLU'))
     batch_size, point_size, channel_size, class_size = (1 << 4), (1 << 10), 3, 40
     x, y = torch.rand((batch_size, point_size, channel_size)).cuda(), torch.randint(0, 40, (batch_size,)).long().cuda()
     model = PointNetV11(cfg).cuda()
